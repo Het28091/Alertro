@@ -12,7 +12,11 @@ export default function ProofOfWork() {
         fetch("/api/works")
             .then(res => res.json())
             .then(data => {
-                setInstallations(data || []);
+                setInstallations(Array.isArray(data) ? data : []);
+                setLoading(false);
+            })
+            .catch(() => {
+                setInstallations([]);
                 setLoading(false);
             });
     }, []);

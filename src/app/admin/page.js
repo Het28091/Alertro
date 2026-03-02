@@ -67,7 +67,7 @@ function AdminContent() {
         setIsLoading(true);
         const res = await fetch("/api/products");
         const data = await res.json();
-        setProducts(data || []);
+        setProducts(Array.isArray(data) ? data : []);
         setIsLoading(false);
     };
 
@@ -75,7 +75,7 @@ function AdminContent() {
         setIsLoading(true);
         const res = await fetch("/api/works");
         const data = await res.json();
-        setWorks(data || []);
+        setWorks(Array.isArray(data) ? data : []);
         setIsLoading(false);
     };
 
