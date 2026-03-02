@@ -57,7 +57,14 @@ export default function ProofOfWork() {
                                     }`}
                             >
                                 {work.images && work.images.length > 0 ? (
-                                    <img src={work.images[0]} alt={work.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                    <>
+                                        <img src={work.images[0]} alt={work.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                        {work.images.length > 1 && (
+                                            <div className="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                                                <CameraIcon size={14} /> {work.images.length} Photos
+                                            </div>
+                                        )}
+                                    </>
                                 ) : (
                                     <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 group-hover:scale-105 transition-transform duration-700 flex items-center justify-center">
                                         <CameraIcon size={48} className="text-white/10" />

@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
 
 export async function POST(req) {
     try {
@@ -11,16 +9,14 @@ export async function POST(req) {
             return NextResponse.json({ error: "No files received" }, { status: 400 });
         }
 
-        const uploadDir = path.join(process.cwd(), "public/uploads");
-        await fs.mkdir(uploadDir, { recursive: true });
-
         const urls = [];
         for (const file of files) {
             if (typeof file === "string") continue; // Just in case
             const buffer = Buffer.from(await file.arrayBuffer());
-            const filename = `${Date.now()}-${file.name.replace(/\s+/g, "_")}`;
-            await fs.writeFile(path.join(uploadDir, filename), buffer);
-            urls.push(`/uploads/${filename}`);
+            const base64 = buffer.toString("base64");
+            const mimeType = file.type || "image/jpeg";
+            const dataUri = `data:${mimeType};base64,${base64}`;
+            urls.push(dataUri);
         }
 
         return NextResponse.json({ urls });
