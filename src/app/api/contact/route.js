@@ -10,7 +10,7 @@ export async function POST(req) {
 
         const data = await resend.emails.send({
             from: 'Alertro Leads <onboarding@resend.dev>', // Update later with verified domain or stick to dev domain.
-            to: ['your-admin-email@gmail.com'],
+            to: ['2821hp@gmail.com'],
             subject: `New Lead: ${name} - ${requirement}`,
             html: `
         <h1>New Lead Received</h1>
